@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><!--힐링송프로젝트--></title>
+
+  <!-- 폰트 로드 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Sacramento&family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --pink-bg: #ffe6f1;
+      --lilac-bg: #f3e9ff;
+      --accent-pink: #ff9bbd;
+      --accent-lilac: #b79aff;
+      --text-main: #4a4458;
+      --card-bg: rgba(255, 255, 255, 0.72);
+      --card-border: rgba(183, 154, 255, 0.45);
+      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      font-family: "Noto Sans KR", sans-serif;
+      color: var(--text-main);
+      background: linear-gradient(135deg, var(--pink-bg), var(--lilac-bg));
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 1040px;
+      padding: 32px 20px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* 배경 장식 */
+    .page::before,
+    .page::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(10px);
+      opacity: 0.7;
+      z-index: -1;
+    }
+
+    .page::before {
+      width: 260px; height: 260px;
+      top: -80px; left: -40px;
+      background: radial-gradient(circle, #ffd1e8 0, transparent 60%);
+    }
+
+    .page::after {
+      width: 320px; height: 320px;
+      bottom: -120px; right: -80px;
+      background: radial-gradient(circle, #dfd4ff 0, transparent 65%);
+    }
+
+    .hero { text-align: center; margin-bottom: 28px; }
+
+    .site-kicker {
+      display: inline-flex;
+      align-items: center; gap: 8px;
+      padding: 4px 12px; border-radius: 999px;
+      background: rgba(255,255,255,0.65);
+      border: 1px solid rgba(255,155,189,0.4);
+      font-size: 13px; color: rgba(74,68,88,0.8);
+      margin-bottom: 14px;
+    }
+
+    .site-title {
+      font-family: "Sacramento", cursive;
+      font-size: 38px;
+      color: var(--accent-pink);
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+    }
+
+    .site-subtitle {
+      font-size: 14px;
+      line-height: 1.7;
+      color: rgba(74, 68, 88, 0.88);
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .songs {
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .song-card {
+      background-color: var(--card-bg);
+      border-radius: 24px;
+      padding: 22px;
+      border: 1px solid var(--card-border);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(16px);
+      transition: 0.3s ease;
+      position: relative;
+    }
+
+    .song-card:hover {
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: 0 22px 46px rgba(0,0,0,0.12);
+    }
+
+    .song-header { display:flex; justify-content:space-between; margin-bottom:14px; }
+
+    .song-title { font-size: 20px; font-weight: 600; margin-bottom: 4px; }
+
+    .goldfish .song-title { color: #ff87aa; }
+    .cherish .song-title { color: #a38bff; }
+
+    .song-body {
+      font-size: 13px;
+      line-height: 1.7;
+      margin-bottom: 14px;
+    }
+
+    .tag {
+      display:inline-block;
+      font-size:11px;
+      padding:4px 10px;
+      margin-right:6px;
+      border-radius:999px;
+      background-color:rgba(255,255,255,0.9);
+      border:1px solid rgba(255,182,193,0.4);
+    }
+
+    .controls {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      font-size:12px;
+    }
+
+    .btn {
+      padding:8px 14px;
+      border-radius:999px;
+      cursor:pointer;
+      text-decoration:none;
+      font-size:12px;
+      font-weight:500;
+      transition:0.2s ease;
+      display:inline-flex;
+      align-items:center;
+    }
+
+    .btn-primary {
+      background: linear-gradient(120deg, var(--accent-pink), var(--accent-lilac));
+      color:white;
+    }
+
+    .btn-outline {
+      border:1px solid rgba(183, 154, 255, 0.5);
+      background-color:white;
+      color: var(--accent-lilac);
+    }
+
+    .btn:hover {
+      transform:translateY(-2px);
+      filter:brightness(1.05);
+    }
+
+    .footer {
+      margin-top:26px;
+      text-align:center;
+      font-size:11px;
+      color:rgba(74,68,88,0.7);
+    }
+
+    @media (max-width:840px) {
+      .songs { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <header class="hero">
+      <div class="site-kicker">✧ 나의 힐링송 ✧</div>
+
+      <h1 class="site-title">
+        <!-- TODO: 메인 타이틀 수정 가능 -->
+        My Healing Songs
+      </h1>
+
+      <p class="site-subtitle">
+        <!-- TODO: 서브 텍스트 원하는 문구로 교체 -->
+        힘든 날, 볼륨을 크게 올려 나를 다독이는 두 곡.
+      </p>
+    </header>
+
+    <main class="songs">
+
+      <!-- 금붕어 카드 -->
+      <section class="song-card goldfish">
+        <div class="song-header">
+          <div>
+            <h2 class="song-title">
+              <!-- TODO: 곡 제목 수정 가능 -->
+              금붕어
+            </h2>
+            <p class="song-artist">
+              <!-- TODO: 아티스트 이름 수정 가능 -->
+              한로로
+            </p>
+          </div>
+        </div>
+
+        <div class="song-body">
+          <!-- TODO: 본문 설명을 자신의 느낌에 맞게 수정 -->
+          머릿속이 복잡할 때 이 노래를 크게 틀면 생각이 잦아드는 느낌.
+        </div>
+
+        <!-- TODO: 태그 개수나 문구 자유롭게 변경 -->
+        <span class="tag">#힐링송</span>
+        <span class="tag">#조용한위로</span>
+
+        <div class="controls">
+          <span>🔊 볼륨 높이기</span>
+          <div>
+            <a class="btn btn-primary"
+               href="https://youtu.be/dAgY7zUqd8E?si=JxEsJpeImBXhrroV"
+               target="_blank">▶ 듣기</a>
+
+            <!-- TODO: 필요 없으면 삭제 가능 -->
+            <a class="btn btn-outline"
+               href="https://youtu.be/tbDGl7jEazA?si=fj4NTtNY9RAH5Aaq"
+               target="_blank">♪ 다른 앱</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Cherish 카드 -->
+      <section class="song-card cherish">
+        <div class="song-header">
+          <div>
+            <h2 class="song-title">
+              <!-- TODO: 곡 제목 수정 가능 -->
+              Cherish
+            </h2>
+            <p class="song-artist">
+              <!-- TODO: 아티스트 이름 수정 가능 -->
+              아일릿 (ILLIT)
+            </p>
+          </div>
+        </div>
+
+        <div class="song-body">
+          <!-- TODO: 본문 설명을 자신의 느낌에 맞게 수정 -->
+          반짝이는 감정을 다시 켜주는, 나를 안아주는 듯한 노래.
+        </div>
+
+        <!-- TODO: 태그 변경 가능 -->
+        <span class="tag">#반짝반짝</span>
+        <span class="tag">#소녀감성</span>
+
+        <div class="controls">
+          <span>💗 오늘의 위로</span>
+          <div>
+            <a class="btn btn-primary"
+               href="https://www.youtube.com/embed/dAgY7zUqd8E"
+               target="_blank">▶ 듣기</a>
+
+            <a class="btn btn-outline"
+               href="https://www.youtube.com/embed/tbDGl7jEazA"
+               target="_blank">♪ 다른 앱</a>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="footer">
+      <!-- TODO: 푸터 문구도 원하는 스타일로 변경 가능 -->
+      볼륨을 높이면 다시 시작할 수 있는 두 곡.
+    </footer>
+
+  </div>
+</body>
+</html>
